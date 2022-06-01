@@ -1,86 +1,59 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:log_page_imane/screens/home.dart';
+import 'package:log_page_imane/utilities/constants.dart';
+import 'package:log_page_imane/screens/login_screen.dart';
 
 class SignUp extends StatelessWidget {
-
   Widget buildName() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Name',
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold
-          ),
+
+          style: kLabelStyle,
+          // style: TextStyle(
+          //     color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+          decoration: kBoxDecorationStyle,
           height: 60,
           child: TextField(
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             style: TextStyle(
-              color: Colors.black87,
+              color: Colors.black,
             ),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(
                   Icons.person,
-                  color: Colors.grey,
+                  color: Color(0xFFF6ae6d3),
                 ),
                 hintText: 'Enter your Name',
-                helperStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                helperStyle: TextStyle(color: Colors.black)),
           ),
         )
       ],
     );
   }
-  Widget buildEmail(){
+
+  Widget buildEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Email',
           style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold
-          ),
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+          decoration: kBoxDecorationStyle,
           height: 60,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
@@ -92,44 +65,29 @@ class SignUp extends StatelessWidget {
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(
                   Icons.email,
-                  color: Colors.grey,
+                  color: Color(0xFFF6ae6d3),
                 ),
                 hintText: ' Enter your Email',
-                helperStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                helperStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
     );
   }
-  Widget buildPassword(){
+
+  Widget buildPassword() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Password',
           style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold
-          ),
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+          decoration: kBoxDecorationStyle,
           height: 60,
           child: TextField(
             obscureText: true,
@@ -141,13 +99,10 @@ class SignUp extends StatelessWidget {
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(
                   Icons.lock,
-                  color: Colors.grey,
+                  color: Color(0xFFF6ae6d3),
                 ),
                 hintText: 'Enter your Password',
-                helperStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                helperStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -203,78 +158,64 @@ class SignUp extends StatelessWidget {
   //   );
   // }
 
-  Widget  buildForgotPassBtn() {
+  Widget buildForgotPassBtn() {
     return Container(
       alignment: Alignment.bottomRight,
       child: FlatButton(
-        onPressed: () =>print("Forget Password"),
+        onPressed: () => print("Forget Password"),
         padding: EdgeInsets.only(right: 0),
         child: Text(
           'Forget Password?',
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
     );
   }
+
   Widget buildSignUpBtn(context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
+      padding: EdgeInsets.symmetric(vertical: 29),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed:()=>Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen())),
+        onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => HomeScreen())),
         padding: EdgeInsets.all(15),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
-        ),
-        color:  Color(0xfff6ae6d3),
-
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: Colors.white,
         child: Text(
           'Sign Up',
           style: TextStyle(
-              color: Colors.black,
-
+              color: Color(0xFFF6ae6d3),
               fontSize: 18,
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
       ),
     );
   }
 
-  Widget buildLoginUpBtn(_) {
+  Widget buildLoginUpBtn(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(_).pop(),
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen())),
       child: RichText(
-        text: TextSpan(
-            children: [
-
-              TextSpan(
-                  text: 'Already have an account?' ,
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500
-                  )
-              ),
-
-              TextSpan(
-                text: '     ',
-
-              ),
-              TextSpan(
-                  text: 'Log in',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500
-                  )
-              )
-            ]
-        ),
+        text: TextSpan(children: [
+          TextSpan(
+              text: 'Already have an account?',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500)),
+          TextSpan(
+            text: '     ',
+          ),
+          TextSpan(
+              text: 'Log in',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500))
+        ]),
       ),
     );
   }
@@ -290,12 +231,11 @@ class SignUp extends StatelessWidget {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 60,
+                    horizontal: 25,
+                    vertical: 60,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -303,14 +243,13 @@ class SignUp extends StatelessWidget {
                       Text(
                         'Sign Up',
                         style: TextStyle(
-                            color:  Color(0xfff6ae6d3),
+                            color: Color(0xfff6ae6d3),
                             fontSize: 40,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 15),
                       buildName(),
-                      SizedBox(height:15),
+                      SizedBox(height: 15),
                       buildEmail(),
                       SizedBox(height: 15),
                       buildPassword(),
@@ -322,15 +261,11 @@ class SignUp extends StatelessWidget {
                     ],
                   ),
                 ),
-
               )
             ],
           ),
         ),
       ),
     );
-
   }
-
 }
-

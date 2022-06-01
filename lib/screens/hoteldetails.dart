@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:log_page_imane/screens/hotel.dart';
+import 'package:log_page_imane/screens/login_screen.dart';
+import 'package:log_page_imane/screens/pickday.dart';
 
 class DetailsScreen extends StatefulWidget {
   final Hotel hotel;
@@ -26,7 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     BoxShadow(
                         color: Colors.black26,
                         offset: Offset(0.0, 2.0),
-                        blurRadius: 6.0)
+                        blurRadius: .0)
                   ]),
                   child: Hero(
                     tag: widget.hotel.imgurl,
@@ -41,7 +43,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     left: 20,
                     child: Container(
                       // height: 15,
-                      // width: 15, doka njrab mahbch aussi ???????????????????
+                      // width: 15,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white),
@@ -65,7 +67,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Icons.favorite_border,
                     ),
                     iconSize: 30,
-                    color: Color(0xFFF24a6395),
+                    color: Colors.red,
                     splashColor: Colors.purple,
                     onPressed: () {},
                   ),
@@ -73,31 +75,31 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 0,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
+              padding: const EdgeInsets.only(left: 20, top: 10),
               child: Text(
                 widget.hotel.title,
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 5),
+              padding: const EdgeInsets.only(left: 20, top: 2),
               child: Text(
                 widget.hotel.location,
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 0,
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(widget.hotel.description),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10),
+              padding: const EdgeInsets.only(left: 20.0, top: 0),
               child: Row(
                 children: [
                   Expanded(
@@ -222,7 +224,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: Text(
                 'Amenity',
                 style: TextStyle(
-                    color: Color(0xFFF24a6395),
+                    color: Colors.red,
                     fontSize: 20,
                     fontWeight: FontWeight.w700),
               ),
@@ -251,7 +253,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Center(
                           child: Icon(
                             Icons.directions_car,
-                            color: Color(0xFFF24a6395),
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -260,7 +262,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         'Parking',
-                        style: TextStyle(color: Color(0xFFF24a6395)),
+                        style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
@@ -284,7 +286,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Center(
                           child: Icon(
                             Icons.hot_tub,
-                            color: Color(0xFFF24a6395),
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -293,7 +295,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         'Bath',
-                        style: TextStyle(color: Color(0xFFF24a6395)),
+                        style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
@@ -317,7 +319,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Center(
                           child: Icon(
                             Icons.pool,
-                            color: Color(0xFFF24a6395),
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -326,7 +328,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         'Pool',
-                        style: TextStyle(color: Color(0xFFF24a6395)),
+                        style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
@@ -350,7 +352,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Center(
                           child: Icon(
                             Icons.wifi,
-                            color: Color(0xFFF24a6395),
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -359,7 +361,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         'wifi',
-                        style: TextStyle(color: Color(0xFFF24a6395)),
+                        style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
@@ -383,7 +385,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: Center(
                           child: Icon(
                             Icons.park,
-                            color: Color(0xFFF24a6395),
+                            color: Colors.red,
                           ),
                         ),
                       ),
@@ -392,7 +394,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         'Park',
-                        style: TextStyle(color: Color(0xFFF24a6395)),
+                        style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
@@ -405,42 +407,85 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    height: 40,
+                    height: 30,
                     width: 150,
                     decoration: BoxDecoration(
-                        color: Color(0xFFF369cfc),
+                        color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black12,
-                            offset: Offset(0.0, 2.0),
+                            color: Colors.white,
+                            offset: Offset(0.0, 1.0),
                           )
                         ]),
-                    child: Center(
+                    child: FittedBox(
                       child: GestureDetector(
-                        onTap: () => showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                  title: Text("Confirmation"),
-                                  content: Text(
-                                      "Hotel booked at ${widget.hotel.title}"),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'ok'),
-                                        child: Text('ok'))
-                                  ],
-                                )),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return pickday();
+                            },
+                          ));
+                        },
                         child: Text(
-                          'Book now',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              fontSize: 20,
-                              color: Colors.white),
+                          ' BOOK NOW  ',
+                          style: TextStyle(color: Colors.white, fontSize: 1),
+                          // style: TextStyle(
+                          //     fontSize: 5, fontWeight: 10
+                          //     , color: Colors.white),
                         ),
+                        //   child: Text(
+                        // //       'Book now',
+                        // //       style: TextStyle(
+                        // //           fontWeight: FontWeight.w100,
+                        // //           fontSize: 20,
+                        // //           color: Colors.white),
+                        // //     ),
+                        // //   ),
+                        // // ),
+
+                        // child: Container(
+                        //   margin: EdgeInsets.only(bottom: 10),
+                        //   child: Row(
+                        //     children: <Widget>[
+                        //       Text(
+                        //         TextStyle(color: Colors.white)
+
+                        //         " BOOK NOW ",
+                        //       ),
+
+                        //       SizedBox(width: 25),
+                        //     ],
+                        //   ),
+                        // ),
                       ),
+
+                      // child: Center(
+                      //   child: GestureDetector(
+                      //     onTap: () => showDialog<String>(
+                      //         context: context,
+                      //         builder: (BuildContext context) => AlertDialog(
+                      //               title: Text("Confirmation"),
+                      //               content: Text(
+                      //                   "Hotel booked at ${widget.hotel.title}"),
+                      //               actions: [
+                      //                 TextButton(
+                      //                     onPressed: () =>
+                      //                         Navigator.pop(context, 'ok'),
+                      //                     child: Text('ok'))
+                      //               ],
+                      //             )),
+                      //     child: Text(
+                      //       'Book now',
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.w100,
+                      //           fontSize: 20,
+                      //           color: Colors.white),
+                      //     ),
+                      //   ),
+                      // ),
                     ),
-                  ),
+                  )
                 ],
               ),
             )

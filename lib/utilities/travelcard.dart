@@ -14,7 +14,7 @@ Widget travelCard(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.0),
         image: DecorationImage(
-          image: NetworkImage(imgUrl),
+          image: AssetImage(imgUrl),
           fit: BoxFit.cover,
           scale: 2.0,
         ),
@@ -22,7 +22,7 @@ Widget travelCard(
       width: width,
       height: height,
       child: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

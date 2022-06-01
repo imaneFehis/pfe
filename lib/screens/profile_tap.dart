@@ -7,13 +7,15 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Widget _ProfilePic() => Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 15),
         child: CircleAvatar(
-          backgroundColor: Colors.pink,
-          backgroundImage: NetworkImage(
-            'https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?cs=srgb&dl=pexels-pixabay-38554.jpg&fm=jpg',
-          ),
-          radius: 60,
+          backgroundColor: Colors.white,
+          backgroundImage: AssetImage('assets/profilepic.jpg'),
+
+          //  NetworkImage(
+          //   'https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?cs=srgb&dl=pexels-pixabay-38554.jpg&fm=jpg',
+          // ),
+          radius: 70,
         ),
       );
 
@@ -22,25 +24,9 @@ class _ProfilePageState extends State<ProfilePage> {
       Container(
         color: Colors.white,
         padding: EdgeInsets.all(10.0),
-        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+        margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
         child: Row(
-          children: <Widget>[
-            Icon(
-              Icons.phone,
-              color: Colors.teal,
-            ),
-            SizedBox(
-              width: 10.0,
-            ),
-            Text(
-              '+8348388348',
-              style: TextStyle(
-                color: Colors.teal,
-                fontFamily: 'Source Sans Pro',
-                fontSize: 20.0,
-              ),
-            ),
-          ],
+          children: <Widget>[],
         ),
       ),
     ]);
@@ -63,7 +49,6 @@ class _ProfilePageState extends State<ProfilePage> {
       style: TextStyle(color: Color(0xFF8D6B48)
           ,fontFamily: 'OpenSans',
       ),
-
       decoration: InputDecoration(
         border: InputBorder.none,
         contentPadding: EdgeInsets.only(top: 14.0),
@@ -73,8 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ),
     ),
       ),
-  ],
-
+  ], aw gotlk nn papa f dar 
     );*/
   }
 
@@ -82,70 +66,27 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff08b5a0),
+        backgroundColor: Color(0xFFFbdffff),
         centerTitle: true,
-        title: Text("YOUR PROFILE"),
+        title: Text(
+          'YOUR PROFILE',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Column(
         children: <Widget>[
-          // Container(
-          //   decoration: BoxDecoration(
-          //     color: Colors.white,
-          //   ),
-          // ),
-          //_ProfilePic()
-
-          /*Text('Fahim Muntashir',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ) ,
-            ),*/
-          /* Container(
-    color: Colors.white,
-    padding: EdgeInsets.all(10.0),
-    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-    child: Row(
-    children: <Widget>[
-    Icon(
-    Icons.phone,
-    color: Colors.teal,
-    ),
-    SizedBox(
-    width: 10.0,
-    ),
-    Text(
-    '+8348388348',
-    style: TextStyle(
-    color: Colors.teal,
-    fontFamily: 'Source Sans Pro',
-    fontSize: 20.0,
-    ),
-    ),
-    ],
-    ),
-    ),*/
-          /*  Positioned(top: 20.0,
-              child:ProfilePic(),
-            ),*/
-          /* Container(
-              height:200,
-              width: 200,
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(100)
-                //more than 50% of width makes circle
-              ),
-            ),*/
           _ProfilePic(),
+
           Container(
-            color: Color(0xFFc0fbf2),
-            padding: EdgeInsets.all(20.0),
-            margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 25.0),
+            color: Color(0xFFFbdffff),
+            padding: EdgeInsets.all(15.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: Row(
               children: <Widget>[
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
                 SizedBox(
                   width: 10.0,
                 ),
@@ -153,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   'Fehis Imane',
                   style: TextStyle(
                     color: Colors.black,
-                    fontFamily: 'Source Sans Pro',
+                    fontFamily: 'TiroBangla',
                     fontSize: 20.0,
                   ),
                 ),
@@ -161,9 +102,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            color: Color(0xFFc0fbf2),
-            padding: EdgeInsets.all(20.0),
-            margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 25.0),
+            color: Color(0xFFFbdffff),
+            padding: EdgeInsets.all(15.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: Row(
               children: <Widget>[
                 Icon(
@@ -186,11 +127,15 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           Container(
-            color: Color(0xFFc0fbf2),
-            padding: EdgeInsets.all(20.0),
-            margin: EdgeInsets.symmetric(vertical: 25, horizontal: 25.0),
+            color: Color(0xFFFbdffff),
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             child: Row(
               children: <Widget>[
+                Icon(
+                  Icons.email,
+                  color: Colors.black,
+                ),
                 SizedBox(
                   width: 10.0,
                 ),
@@ -198,7 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   'imanefh28@gmail.com',
                   style: TextStyle(
                     color: Colors.black,
-                    fontFamily: 'Source Sans Pro',
+                    fontFamily: 'TiroBangla',
                     fontSize: 20.0,
                   ),
                 ),
@@ -206,6 +151,30 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
 
+          Container(
+            color: Color(0xFFFbdffff),
+            padding: EdgeInsets.all(15.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.home,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  'Blida ville',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'TiroBangla',
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
           //_ProfilePic(),
         ],
       ),

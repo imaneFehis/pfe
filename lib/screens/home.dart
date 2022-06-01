@@ -20,37 +20,48 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: pageController,
         physics: NeverScrollableScrollPhysics(),
         children: [
-          /// favorite
           FavoriteTap(),
-          HomeTap(),
+          HomePage(),
           ProfilePage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.red,
+        selectedItemColor: Color.fromARGB(255, 104, 233, 214),
         currentIndex: currentIndex,
         onTap: (index) {
           pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 100),
               curve: Curves.bounceIn);
           currentIndex = index;
           setState(() {});
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'favorite',
+            // icon: Icon(Icons.favorite),
+            // label: 'favorite',
+
+            icon: Icon(Icons.star_border_rounded,
+                color: Colors.black38, size: 25),
+            label: "Favourites",
 
             //backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
+            icon: Icon(
+              Icons.home_outlined,
+              size: 30,
+            ),
+            label: "Home",
+            // icon: Icon(Icons.home),
+            // label: 'home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'profil',
+            icon: Icon(Icons.person_outline_rounded,
+                color: Colors.black38, size: 30),
+            label: "Profile",
+            // icon: Icon(Icons.person),
+            // label: 'profil',
           ),
         ],
       ),
