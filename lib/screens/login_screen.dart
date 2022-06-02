@@ -1,7 +1,10 @@
 import 'dart:ffi';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:log_page_imane/controllers/auth_controller.dart';
 import 'package:log_page_imane/screens/home.dart';
 // import 'package:get/get.dart';
 import 'package:log_page_imane/screens/singup.dart';
@@ -16,6 +19,9 @@ class LoginScreen extends StatefulWidget {
 
 class _loginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  AuthController authController = Get.find<AuthController>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,6 +36,7 @@ class _loginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
@@ -66,6 +73,7 @@ class _loginScreenState extends State<LoginScreen> {
           height: 60.0,
           child: TextField(
             obscureText: true,
+            controller: passwordController,
             style: TextStyle(color: Colors.black, fontFamily: 'OpenSans'),
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -131,8 +139,31 @@ class _loginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 7.0,
         // onPressed: ()=>Get.to(FirstScreen()),
-        onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => HomeScreen())),
+        onPressed: () async {
+          try {
+            await authController.signIn(
+              email: emailController.text,
+              password: passwordController.text,
+            );
+            print(authController.currentUser?.id);
+            if (authController.isLogin) {
+              Get.offAll(() => HomeScreen());
+            }
+          } on DioError catch (e) {
+            Get.defaultDialog(
+              title: 'Error',
+              content: Text(
+                (e.response ?? 'Check your internet connection').toString(),
+              ),
+              confirm: TextButton(
+                onPressed: () => Get.back(),
+                child: const Text('Ok'),
+              ),
+            );
+            print('===========');
+            print(e.response);
+          }
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),

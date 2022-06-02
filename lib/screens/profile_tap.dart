@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:log_page_imane/controllers/auth_controller.dart';
+import 'package:log_page_imane/main.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -6,15 +9,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  AuthController authController = Get.find<AuthController>();
   Widget _ProfilePic() => Container(
         margin: EdgeInsets.symmetric(vertical: 15),
         child: CircleAvatar(
           backgroundColor: Colors.white,
-          backgroundImage: AssetImage('assets/profilepic.jpg'),
-
-          //  NetworkImage(
-          //   'https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?cs=srgb&dl=pexels-pixabay-38554.jpg&fm=jpg',
-          // ),
+          // backgroundImage: AssetImage('assets/profilepic.jpg'),
+          backgroundImage: authController.currentUser!.picture != null
+              ? NetworkImage(
+                  authController.currentUser!.picture!,
+                )
+              : null,
+          child: authController.currentUser!.picture == null
+              ? const Icon(Icons.person, size: 75)
+              : null,
           radius: 70,
         ),
       );
@@ -68,7 +76,19 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: Color(0xFFFbdffff),
         centerTitle: true,
-        title: Text(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await authController.signOut();
+              Get.offAll(WelcomeScreen());
+            },
+            icon: Icon(
+              Icons.power_settings_new,
+              color: Colors.black,
+            ),
+          ),
+        ],
+        title: const Text(
           'YOUR PROFILE',
           style: TextStyle(color: Colors.black),
         ),
@@ -91,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 10.0,
                 ),
                 Text(
-                  'Fehis Imane',
+                  authController.currentUser!.username!,
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'TiroBangla',
@@ -115,7 +135,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 10.0,
                 ),
                 Text(
-                  '+21356674829',
+                  authController.currentUser!.phone == ''
+                      ? 'Add your number'
+                      : authController.currentUser!.phone!,
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'Source Sans Pro',
@@ -140,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 10.0,
                 ),
                 Text(
-                  'imanefh28@gmail.com',
+                  authController.currentUser!.email!,
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'TiroBangla',
@@ -165,7 +187,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: 10.0,
                 ),
                 Text(
-                  'Blida ville',
+                  authController.currentUser!.address == ''
+                      ? "Add your address"
+                      : authController.currentUser!.address!,
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'TiroBangla',

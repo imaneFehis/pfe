@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:log_page_imane/controllers/auth_controller.dart';
+import 'package:log_page_imane/screens/home.dart';
 import 'package:log_page_imane/screens/login_screen.dart';
 import 'package:log_page_imane/utilities/constants.dart';
 import 'package:log_page_imane/screens/singup.dart';
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'My Hotel',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
 }
 
 class WelcomeScreen extends StatelessWidget {
+  AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,72 +83,101 @@ class WelcomeScreen extends StatelessWidget {
             ),
             //kalktni clavier ay tathrk wahdha
             Spacer(),
-            FittedBox(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ));
-                },
-                // waittttt
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Color(0xfffbdffff),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        "        LOG IN",
+            FutureBuilder(
+              future: authController.initData(),
+              builder: (context, snapshot) {
+                WidgetsBinding.instance
+                    ?.addPostFrameCallback((timeStamp) async {
+                  if (authController.isLogin) {
+                    await Future.delayed(const Duration(milliseconds: 800));
+                    Get.offAll(HomeScreen());
+                  }
+                });
+                if (snapshot.connectionState == ConnectionState.waiting ||
+                    authController.isLogin) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xfffbdffff),
+                    ),
+                  );
+                }
+
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FittedBox(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return LoginScreen();
+                            },
+                          ));
+                        },
+                        // waittttt
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color(0xfffbdffff),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "LOG IN",
+                              ),
+                              SizedBox(width: 15),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      SizedBox(width: 25),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.black,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.04,
-            ),
-            FittedBox(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return SignUp();
-                    },
-                  ));
-                },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Color(0xfffbdffff),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        "     SING UP ",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.04,
+                    ),
+                    FittedBox(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return SignUp();
+                            },
+                          ));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color(0xfffbdffff),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "SING UP ",
+                              ),
+                              SizedBox(width: 15),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.black,
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      SizedBox(width: 25),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Colors.black,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                    ),
+                  ],
+                );
+              },
             ),
+
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
             ),
