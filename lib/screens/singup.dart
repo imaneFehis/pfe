@@ -1,17 +1,25 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:log_page_imane/screens/home.dart';
 import 'package:log_page_imane/utilities/constants.dart';
 import 'package:log_page_imane/screens/login_screen.dart';
 
+import '../controllers/auth_controller.dart';
+
 class SignUp extends StatelessWidget {
+  AuthController authController = Get.find<AuthController>();
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   Widget buildName() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Name',
-
           style: kLabelStyle,
           // style: TextStyle(
           //     color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
@@ -23,6 +31,7 @@ class SignUp extends StatelessWidget {
           height: 60,
           child: TextField(
             keyboardType: TextInputType.name,
+            controller: usernameController,
             style: TextStyle(
               color: Colors.black,
             ),
@@ -56,6 +65,7 @@ class SignUp extends StatelessWidget {
           decoration: kBoxDecorationStyle,
           height: 60,
           child: TextField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black87,
@@ -90,6 +100,7 @@ class SignUp extends StatelessWidget {
           decoration: kBoxDecorationStyle,
           height: 60,
           child: TextField(
+            controller: passwordController,
             obscureText: true,
             style: TextStyle(
               color: Colors.black87,
@@ -178,8 +189,31 @@ class SignUp extends StatelessWidget {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => HomeScreen())),
+        onPressed: () async {
+          try {
+            await authController.signUp(
+              email: emailController.text,
+              password: passwordController.text,
+              username: usernameController.text,
+            );
+            if (authController.isLogin) {
+              Get.offAll(() => HomeScreen());
+            }
+          } on DioError catch (e) {
+            Get.defaultDialog(
+              title: 'Error',
+              content: Text(
+                (e.response ?? 'Check your internet connection').toString(),
+              ),
+              confirm: TextButton(
+                onPressed: () => Get.back(),
+                child: const Text('Ok'),
+              ),
+            );
+            print('===========');
+            print(e.response);
+          }
+        },
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: Colors.white,
