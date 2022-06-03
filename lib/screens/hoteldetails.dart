@@ -401,14 +401,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 10, top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    height: 30,
-                    width: 150,
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () async {
+                    DateTimeRange? dateTimeRange = await showDateRangePicker(
+                      context: context,
+                      firstDate: DateTime(2015),
+                      lastDate: DateTime(2030),
+                      initialDateRange: DateTimeRange(
+                        start: DateTime.now(),
+                        end: DateTime.now(),
+                      ),
+                    );
+                    if (dateTimeRange != null) {
+                      showDialogConfirmation(dateTimeRange);
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 5,
+                    ),
                     decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
@@ -418,80 +434,62 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             offset: Offset(0.0, 1.0),
                           )
                         ]),
-                    child: FittedBox(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return pickday();
-                            },
-                          ));
-                        },
-                        child: Text(
-                          ' BOOK NOW  ',
-                          style: TextStyle(color: Colors.white, fontSize: 1),
-                          // style: TextStyle(
-                          //     fontSize: 5, fontWeight: 10
-                          //     , color: Colors.white),
-                        ),
-                        //   child: Text(
-                        // //       'Book now',
-                        // //       style: TextStyle(
-                        // //           fontWeight: FontWeight.w100,
-                        // //           fontSize: 20,
-                        // //           color: Colors.white),
-                        // //     ),
-                        // //   ),
-                        // // ),
-
-                        // child: Container(
-                        //   margin: EdgeInsets.only(bottom: 10),
-                        //   child: Row(
-                        //     children: <Widget>[
-                        //       Text(
-                        //         TextStyle(color: Colors.white)
-
-                        //         " BOOK NOW ",
-                        //       ),
-
-                        //       SizedBox(width: 25),
-                        //     ],
-                        //   ),
-                        // ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'BOOK NOW',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
                       ),
-
-                      // child: Center(
-                      //   child: GestureDetector(
-                      //     onTap: () => showDialog<String>(
-                      //         context: context,
-                      //         builder: (BuildContext context) => AlertDialog(
-                      //               title: Text("Confirmation"),
-                      //               content: Text(
-                      //                   "Hotel booked at ${widget.hotel.title}"),
-                      //               actions: [
-                      //                 TextButton(
-                      //                     onPressed: () =>
-                      //                         Navigator.pop(context, 'ok'),
-                      //                     child: Text('ok'))
-                      //               ],
-                      //             )),
-                      //     child: Text(
-                      //       'Book now',
-                      //       style: TextStyle(
-                      //           fontWeight: FontWeight.w100,
-                      //           fontSize: 20,
-                      //           color: Colors.white),
-                      //     ),
-                      //   ),
-                      // ),
                     ),
-                  )
-                ],
-              ),
-            )
+                    //   child: Text(
+                    // //       'Book now',
+                    // //       style: TextStyle(
+                    // //           fontWeight: FontWeight.w100,
+                    // //           fontSize: 20,
+                    // //           color: Colors.white),
+                    // //     ),
+                    // //   ),
+                    // // ),
+
+                    // child: Container(
+                    //   margin: EdgeInsets.only(bottom: 10),
+                    //   child: Row(
+                    //     children: <Widget>[
+                    //       Text(
+                    //         TextStyle(color: Colors.white)
+
+                    //         " BOOK NOW ",
+                    //       ),
+
+                    //       SizedBox(width: 25),
+                    //     ],
+                    //   ),
+                    // ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
           ],
         ),
       ]),
+    );
+  }
+
+  showDialogConfirmation(DateTimeRange dateTimeRange) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Confirmation"),
+        content: Text(
+          "Hotel booked at ${widget.hotel.title}, \nFrom: ${dateTimeRange.start.toString().substring(0, 11)} \nTo: ${dateTimeRange.end.toString().substring(0, 11)}",
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context, 'ok'), child: Text('ok'))
+        ],
+      ),
     );
   }
 }

@@ -5,6 +5,7 @@ class Hotel {
   String location;
   int price;
   double rating;
+  ////with Millennium modern outlook with a touch of local culture. Featuring 226 luxury rooms and suites, a selection of restaurants offering exquisite cuisines. Host your events at the meeting spaces equipped with modern facilities.
 
   Hotel(this.imgurl, this.title, this.description, this.location, this.price,
       this.rating);
@@ -13,7 +14,7 @@ class Hotel {
     Hotel(
         'assets/hotel2.jpg',
         'BN Hotel',
-        'Located in Oran downtown business district, InterContinental Oran is the foremost name of luxury. The hotel is beautifully designed boasted with Millennium modern outlook with a touch of local culture. Featuring 226 luxury rooms and suites, a selection of restaurants offering exquisite cuisines. Host your events at the meeting spaces equipped with modern facilities. ',
+        'Located in Oran downtown business district, InterContinental Oran is the foremost name of luxury. The hotel is beautifully designed boasted ',
         " Oran",
         15000,
         4.8),

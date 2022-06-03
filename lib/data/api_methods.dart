@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-const apiUrl = "http://10.0.16.15:8000";
+const apiUrl = "http://192.168.137.1:8000";
 Dio dio = Dio();
 
 List<Map> hotels = [];
