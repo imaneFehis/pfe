@@ -5,7 +5,7 @@ class User {
   String? email;
   String? username;
   String? phone;
-  String? picture;
+  dynamic? picture;
   String? language;
   String? address;
   String? aboutMe;
