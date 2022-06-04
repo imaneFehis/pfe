@@ -1,13 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import 'api.dart';
 
-List<Map> hotels = [];
-
-Future<List?> getHotels() async {
-  String url = '$api/api/hotels/';
+Future<List?> getData({String type = "hotels"}) async {
+  String url = '$api/api/$type/';
 
   Response response = await dio.get(url);
+
+  return response.data;
+}
+
+Future res(DateTimeRange dateTimeRange, Map<String, dynamic> room) async {
+  String url = '$api/api/reservation/create/';
+  var data = {
+    'room': room['id'],
+    'fromdate': dateTimeRange.start.toIso8601String(),
+    'todate': dateTimeRange.end.toIso8601String(),
+  };
+  Response response = await dio.post(
+    url,
+    data: data,
+    options: options,
+  );
 
   return response.data;
 }

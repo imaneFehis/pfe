@@ -17,123 +17,121 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-          future: getHotels(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            List data = (snapshot.data as List);
-
-            return ListView(
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            "Find The \n        Perfect Room",
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              fontFamily: 'TiroBangla',
-                            ),
-                          ),
-                        ],
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      "Find The \n        Perfect Room",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: 'TiroBangla',
                       ),
-                      // Container(
-                      //   height: 50,
-                      //   width: 50,
-                      //   decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(100.0),
-                      //       image: DecorationImage(
-                      //           image: AssetImage('assets/images/face.jpg'),
-                      //           fit: BoxFit.cover)),
-                      // )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFEFEDEE),
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0.0, 10.0),
-                              blurRadius: 10.0)
-                        ]),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                            size: 20.0,
-                          ),
-                        ),
-                        Container(
-                          height: 50.0,
-                          width: MediaQuery.of(context).size.width * 0.79,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'search your room'),
-                          ),
-                        )
-                      ],
+                // Container(
+                //   height: 50,
+                //   width: 50,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(100.0),
+                //       image: DecorationImage(
+                //           image: AssetImage('assets/images/face.jpg'),
+                //           fit: BoxFit.cover)),
+                // )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 0,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Color(0xFFEFEDEE),
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, 10.0),
+                        blurRadius: 10.0)
+                  ]),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                      size: 20.0,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 25.0,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Most Popular",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  child: ListView.builder(
+                  Container(
+                    height: 50.0,
+                    width: MediaQuery.of(context).size.width * 0.79,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'search your room'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25.0,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              "Hotels",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            height: 300,
+            width: double.infinity,
+            child: FutureBuilder(
+                future: getData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  List data = (snapshot.data as List);
+
+                  return ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: data.length,
                       // itemCount: hotel.length,
                       itemBuilder: (context, index) {
                         Hotel hotelscreen = hotel[index];
-
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => DetailsScreen(
-                                    hotel: hotelscreen,
-                                  ),
-                                ));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (_) => DetailsScreen(
+                            //         hotel: hotelscreen,
+                            //       ),
+                            //     ));
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 10.0),
@@ -229,30 +227,42 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         );
-                      }),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Best Deals',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                HotelPackage(),
+                      });
+                }),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Rooms',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                )
               ],
-            );
-          }),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          FutureBuilder(
+              future: getData(type: 'rooms'),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                List data = (snapshot.data as List);
+
+                return HotelPackage(
+                  data: data,
+                );
+              }),
+        ],
+      ),
     );
   }
 }

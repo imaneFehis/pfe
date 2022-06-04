@@ -5,7 +5,8 @@ import 'package:log_page_imane/screens/hotel.dart';
 import 'package:log_page_imane/screens/hoteldetails.dart';
 
 class HotelPackage extends StatelessWidget {
-  final hotel = Hotel.PeoplechoiceList();
+  HotelPackage({required this.data});
+  List data;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,8 @@ class HotelPackage extends StatelessWidget {
           separatorBuilder: (_, index) => SizedBox(
                 height: 10,
               ),
-          itemCount: hotel.length,
+          itemCount: data.length,
           itemBuilder: (context, index) {
-            Hotel hotelscreen = hotel[index];
             return Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
@@ -27,7 +27,7 @@ class HotelPackage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (_) => DetailsScreen(
-                          hotel: hotelscreen,
+                          data: data[index],
                         ),
                       ));
                 },
@@ -47,7 +47,7 @@ class HotelPackage extends StatelessWidget {
                     children: [
                       Positioned(
                           child: Hero(
-                        tag: hotelscreen.imgurl,
+                        tag: data[index]['image'],
                         child: Container(
                           height: 150,
                           width: 120,
@@ -56,7 +56,7 @@ class HotelPackage extends StatelessWidget {
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10)),
                             image: DecorationImage(
-                                image: AssetImage(hotel[index].imgurl),
+                                image: NetworkImage(data[index]['image']),
                                 fit: BoxFit.cover),
                           ),
                         ),
@@ -69,17 +69,17 @@ class HotelPackage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                hotel[index].title,
+                                data[index]['name'],
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w400),
                               ),
                               Text(
-                                hotel[index].location,
+                                data[index]['hotel']['address'],
                                 style: TextStyle(
                                     fontSize: 10, fontWeight: FontWeight.w400),
                               ),
                               Text(
-                                '${hotel[index].price} DA price for night',
+                                '${data[index]['price']} DA price for night',
                                 style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -114,23 +114,23 @@ class HotelPackage extends StatelessWidget {
                               )
                             ],
                           )),
-                      Positioned(
-                          bottom: 40,
-                          left: 300,
-                          child: Center(
-                            child: Transform.rotate(
-                              angle: pi / -2,
-                              child: Container(
-                                height: 50,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red,
-                                ),
-                                child: Center(child: Text('BOOK NOW')),
-                              ),
-                            ),
-                          )),
+                      // Positioned(
+                      //     bottom: 40,
+                      //     left: 300,
+                      //     child: Center(
+                      //       child: Transform.rotate(
+                      //         angle: pi / -2,
+                      //         child: Container(
+                      //           height: 50,
+                      //           width: 100,
+                      //           decoration: BoxDecoration(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             color: Colors.red,
+                      //           ),
+                      //           child: Center(child: Text('BOOK NOW')),
+                      //         ),
+                      //       ),
+                      //     )),
                     ],
                   ),
                 ),

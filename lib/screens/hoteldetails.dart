@@ -3,10 +3,12 @@ import 'package:log_page_imane/screens/hotel.dart';
 import 'package:log_page_imane/screens/login_screen.dart';
 import 'package:log_page_imane/screens/pickday.dart';
 
-class DetailsScreen extends StatefulWidget {
-  final Hotel hotel;
+import '../data/api_methods.dart';
 
-  DetailsScreen({required this.hotel});
+class DetailsScreen extends StatefulWidget {
+  Map<String, dynamic> data;
+
+  DetailsScreen({required this.data});
 
   @override
   _DetailsScreenState createState() => _DetailsScreenState();
@@ -31,9 +33,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         blurRadius: .0)
                   ]),
                   child: Hero(
-                    tag: widget.hotel.imgurl,
+                    tag: widget.data['image'],
                     child: Image(
-                      image: AssetImage(widget.hotel.imgurl),
+                      image: NetworkImage(widget.data['image']),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -80,14 +82,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Text(
-                widget.hotel.title,
+                widget.data['name'],
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 2),
               child: Text(
-                widget.hotel.location,
+                widget.data['hotel']['address'],
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
@@ -96,7 +98,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(widget.hotel.description),
+              child: Text(widget.data['description']),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 0),
@@ -113,7 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text('${widget.hotel.price} '),
+                        Text('${widget.data['price']} '),
                       ],
                     ),
                   ),
@@ -131,7 +133,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                         Row(
                           children: [
-                            Text(widget.hotel.rating.toString()),
+                            Text(widget.data['hotel']['rate'].toString()),
                             Icon(
                               Icons.star,
                               size: 12,
@@ -234,171 +236,146 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Row(
               children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 6)
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.directions_car,
-                            color: Colors.red,
-                          ),
+                widget.data['is_airconditioning']
+                    ? Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 6)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.air,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Airconditioner',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Parking',
-                        style: TextStyle(color: Colors.red),
                       )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 6)
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.hot_tub,
-                            color: Colors.red,
-                          ),
+                    : const SizedBox(),
+                widget.data['is_toilet']
+                    ? Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 6)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.wc,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'WC',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Bath',
-                        style: TextStyle(color: Colors.red),
                       )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 6)
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.pool,
-                            color: Colors.red,
-                          ),
+                    : const SizedBox(),
+                widget.data['is_shower']
+                    ? Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 6)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.pool,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Shower',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Pool',
-                        style: TextStyle(color: Colors.red),
                       )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 6)
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.wifi,
-                            color: Colors.red,
-                          ),
+                    : const SizedBox(),
+                widget.data['is_wifi']
+                    ? Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 6)
+                                  ]),
+                              child: Center(
+                                child: Icon(
+                                  Icons.wifi,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'wifi',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'wifi',
-                        style: TextStyle(color: Colors.red),
                       )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                  spreadRadius: 6)
-                            ]),
-                        child: Center(
-                          child: Icon(
-                            Icons.park,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Park',
-                        style: TextStyle(color: Colors.red),
-                      )
-                    ],
-                  ),
-                ),
+                    : const SizedBox(),
               ],
             ),
             SizedBox(height: 10),
@@ -418,6 +395,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     );
                     if (dateTimeRange != null) {
                       showDialogConfirmation(dateTimeRange);
+                      await res(dateTimeRange, widget.data);
                     }
                   },
                   child: Container(
@@ -483,7 +461,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       builder: (BuildContext context) => AlertDialog(
         title: Text("Confirmation"),
         content: Text(
-          "Hotel booked at ${widget.hotel.title}, \nFrom: ${dateTimeRange.start.toString().substring(0, 11)} \nTo: ${dateTimeRange.end.toString().substring(0, 11)}",
+          "Hotel booked at ${widget.data['name']}, \nFrom: ${dateTimeRange.start.toString().substring(0, 11)} \nTo: ${dateTimeRange.end.toString().substring(0, 11)}",
         ),
         actions: [
           TextButton(
