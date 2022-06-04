@@ -27,6 +27,8 @@ class _ProfilePageState extends State<ProfilePage> {
             if (path != null) {
               authController.updateUserInfo(User(picture: File(path)));
             }
+            authController.isLoading = false;
+            authController.update();
           } catch (e) {
             print(e);
           }
