@@ -15,8 +15,8 @@ Future res(DateTimeRange dateTimeRange, Map<String, dynamic> room) async {
   String url = '$api/api/reservation/create/';
   var data = {
     'room': room['id'],
-    'fromdate': dateTimeRange.start.toIso8601String(),
-    'todate': dateTimeRange.end.toIso8601String(),
+    'fromdate': dateTimeRange.start.toIso8601String().substring(0, 10),
+    'todate': dateTimeRange.end.toIso8601String().substring(0, 10),
   };
   print(url);
   Response response = await dio.post(
