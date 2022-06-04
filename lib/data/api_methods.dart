@@ -18,6 +18,7 @@ Future res(DateTimeRange dateTimeRange, Map<String, dynamic> room) async {
     'fromdate': dateTimeRange.start.toIso8601String(),
     'todate': dateTimeRange.end.toIso8601String(),
   };
+  print(url);
   Response response = await dio.post(
     url,
     data: data,
