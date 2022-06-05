@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:log_page_imane/controllers/favorite_controller.dart';
 import 'package:log_page_imane/screens/hotel.dart';
 import 'package:log_page_imane/screens/login_screen.dart';
 import 'package:log_page_imane/screens/pickday.dart';
 
+import '../data/api.dart';
 import '../data/api_methods.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  FavoriteController favoriteController = Get.find<FavoriteController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   child: Hero(
                     tag: widget.data['image'],
                     child: Image(
-                      image: NetworkImage(widget.data['image']),
+                      image: NetworkImage(
+                          (widget.data['image'] as String).contains(api)
+                              ? widget.data['image']
+                              : api + widget.data['image']),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -61,19 +68,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ),
                     )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.favorite_border,
+                GetBuilder<FavoriteController>(builder: (context) {
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: Icon(
+                        favoriteController.isExist(widget.data['id'])
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                      ),
+                      iconSize: 30,
+                      color: Colors.red,
+                      splashColor: Colors.purple,
+                      onPressed: () {
+                        favoriteController.onChange(widget.data);
+                      },
                     ),
-                    iconSize: 30,
-                    color: Colors.red,
-                    splashColor: Colors.purple,
-                    onPressed: () {},
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
             SizedBox(
