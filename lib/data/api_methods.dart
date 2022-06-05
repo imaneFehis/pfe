@@ -11,6 +11,14 @@ Future<List?> getData({String type = "hotels"}) async {
   return response.data;
 }
 
+Future<List?> getRoomsByHotel(int hotelId) async {
+  String url = '$api/api/rooms/hotel/$hotelId/';
+
+  Response response = await dio.get(url);
+
+  return response.data;
+}
+
 Future res(DateTimeRange dateTimeRange, Map<String, dynamic> room) async {
   String url = '$api/api/reservation/create/';
   var data = {

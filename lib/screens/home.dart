@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:log_page_imane/controllers/favorite_controller.dart';
 import 'package:log_page_imane/screens/favorite_tap.dart';
 import 'package:log_page_imane/screens/profile_tap.dart';
 import 'package:log_page_imane/screens/home_tap.dart';
@@ -12,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController = PageController(initialPage: 1);
+  FavoriteController favoriteController = Get.put(FavoriteController());
   int currentIndex = 1;
   @override
   Widget build(BuildContext context) {

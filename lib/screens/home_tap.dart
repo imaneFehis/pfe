@@ -3,6 +3,7 @@ import 'package:log_page_imane/data/api_methods.dart';
 import 'package:log_page_imane/screens/hotel.dart';
 import 'package:log_page_imane/screens/hotelPackage.dart';
 import 'package:log_page_imane/screens/hoteldetails.dart';
+import 'package:log_page_imane/screens/rooms_by_hotel_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -125,13 +126,14 @@ class _HomePageState extends State<HomePage> {
                         Hotel hotelscreen = hotel[index];
                         return GestureDetector(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (_) => DetailsScreen(
-                            //         hotel: hotelscreen,
-                            //       ),
-                            //     ));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => RoomsByHotelScreen(
+                                  hotelId: data[index]['id'],
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 10.0),
